@@ -107,7 +107,7 @@ export const RevenueWaterfallChart = ({ data }: { data: any[] }) => {
           <Tooltip 
             contentStyle={{ backgroundColor: 'rgba(15, 23, 42, 0.9)', border: '1px solid var(--border-color)', borderRadius: '8px' }}
             itemStyle={{ color: '#fff' }}
-            formatter={(value: number) => `$${value.toLocaleString()}`}
+            formatter={(value: any) => `$${Number(value).toLocaleString()}`}
           />
           {/* This uses a trick for waterfall in recharts: a transparent base bar, and then a colored top bar */}
           <Bar dataKey="base" stackId="a" fill="transparent" />

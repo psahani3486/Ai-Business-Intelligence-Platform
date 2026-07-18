@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import KPICard from '@/components/dashboard/KPICard';
-import { RevenueChart } from '@/components/charts/Charts';
+import { RevenueChart, CustomerGrowthChart } from '@/components/charts/Charts';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { DollarSign, ShoppingCart, Users, Activity } from 'lucide-react';
 import api from '@/lib/api';
@@ -17,18 +17,23 @@ export default function Dashboard() {
     margin_pct: 0
   });
   const [revenueData, setRevenueData] = useState([]);
+  const [customerGrowth, setCustomerGrowth] = useState<any>(null);
+  const [activeModel, setActiveModel] = useState<'xgboost' | 'prophet'>('xgboost');
+  
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [kpiRes, trendRes] = await Promise.all([
+        const [kpiRes, trendRes, growthRes] = await Promise.all([
           api.get('/dashboard/kpis'),
-          api.get('/dashboard/revenue-trend')
+          api.get('/dashboard/revenue-trend'),
+          api.get('/forecast/customer-growth')
         ]);
         setKpis(kpiRes.data);
         setRevenueData(trendRes.data);
+        setCustomerGrowth(growthRes.data);
       } catch (err) {
         console.error(err);
         setError("Failed to load dashboard data");
@@ -139,9 +144,59 @@ export default function Dashboard() {
         
         <RevenueChart title="Revenue Trend (YTD)" data={revenueData} delay={0.5} />
         
-        <div className="card col-span-4" style={{ height: '400px', display: 'flex', flexDirection: 'column' }}>
+        {customerGrowth && (
+          <>
+            <div className="card col-span-4" style={{ height: '400px', display: 'flex', flexDirection: 'column' }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '24px' }}>Model Comparison (RMSE)</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', flex: 1, overflowY: 'auto' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                  <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>Metric</span>
+                  <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>XGBoost</span>
+                  <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>Prophet</span>
+                </div>
+                {['new', 'returning', 'mau'].map((metric) => (
+                  <div key={metric} style={{ display: 'flex', justifyContent: 'space-between', padding: '12px', background: 'var(--bg-secondary)', borderRadius: '6px' }}>
+                    <span style={{ textTransform: 'capitalize' }}>{metric}</span>
+                    <span style={{ color: (customerGrowth.metrics?.xgboost?.[metric] || 0) < (customerGrowth.metrics?.prophet?.[metric] || 0) ? 'var(--accent-emerald)' : 'var(--text-secondary)' }}>
+                      {(customerGrowth.metrics?.xgboost?.[metric] || 0).toFixed(2)}
+                    </span>
+                    <span style={{ color: (customerGrowth.metrics?.prophet?.[metric] || 0) < (customerGrowth.metrics?.xgboost?.[metric] || 0) ? 'var(--accent-emerald)' : 'var(--text-secondary)' }}>
+                      {(customerGrowth.metrics?.prophet?.[metric] || 0).toFixed(2)}
+                    </span>
+                  </div>
+                ))}
+                
+                <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'center' }}>
+                  <button 
+                    onClick={() => setActiveModel(activeModel === 'xgboost' ? 'prophet' : 'xgboost')}
+                    style={{ 
+                      background: 'transparent',
+                      border: '1px solid var(--border-color)',
+                      color: 'var(--text-primary)',
+                      padding: '8px 16px',
+                      borderRadius: '6px',
+                      cursor: 'pointer',
+                      fontSize: '0.875rem'
+                    }}
+                  >
+                    Switch to {activeModel === 'xgboost' ? 'Prophet' : 'XGBoost'} View
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <CustomerGrowthChart 
+              title="30-Day Customer Growth Forecast" 
+              data={activeModel === 'xgboost' ? customerGrowth.xgboost : customerGrowth.prophet} 
+              delay={0.6}
+              modelType={activeModel}
+            />
+          </>
+        )}
+        
+        <div className="card col-span-12" style={{ height: 'auto', display: 'flex', flexDirection: 'column' }}>
           <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '24px' }}>AI Insights</h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', flex: 1, overflowY: 'auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
             <div style={{ padding: '16px', background: 'rgba(16, 185, 129, 0.1)', borderLeft: '4px solid var(--accent-emerald)', borderRadius: '4px' }}>
               <div style={{ fontWeight: 600, marginBottom: '4px' }}>Revenue Optimization</div>
               <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Based on current trajectory, increasing marketing spend by 15% in Q3 could yield a 22% revenue lift.</div>
