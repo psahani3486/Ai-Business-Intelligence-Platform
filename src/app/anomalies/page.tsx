@@ -3,24 +3,34 @@
 import { PageHeader } from '@/components/ui/PageHeader';
 import { AlertOctagon, TrendingDown, Eye } from 'lucide-react';
 import KPICard from '@/components/dashboard/KPICard';
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import api from '@/lib/api';
 import { 
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, ReferenceDot 
 } from 'recharts';
 
 export default function AnomaliesPage() {
-  const [anomalyData, setAnomalyData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data: anomalyData, isLoading: loading, isError } = useQuery({
+    queryKey: ['anomalies_detect'],
+    queryFn: async () => {
+      const res = await api.get('/anomalies/detect');
+      return res.data.reverse();
+    }
+  });
 
-  useEffect(() => {
-    api.get('/anomalies/detect')
-      .then(res => setAnomalyData(res.data.reverse())) // reverse so oldest is first for the chart
-      .catch(err => console.error(err))
-      .finally(() => setLoading(false));
-  }, []);
+  if (loading) {
+    return <div className="page-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ color: 'var(--accent-blue)' }}>Detecting Anomalies...</div>
+    </div>;
+  }
 
-  const anomalyCount = anomalyData.filter(d => d.isAnomaly).length;
+  if (isError || !anomalyData) {
+    return <div className="page-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ color: 'var(--accent-rose)' }}>Failed to load anomaly data</div>
+    </div>;
+  }
+
+  const anomalyCount = anomalyData.filter((d: any) => d.isAnomaly).length;
 
   return (
     <main className="page-container">
@@ -81,7 +91,7 @@ export default function AnomaliesPage() {
                 />
                 
                 {/* Highlight Anomalies */}
-                {anomalyData.map((entry, index) => {
+                {anomalyData.map((entry: any, index: number) => {
                   if (entry.isAnomaly) {
                     return (
                       <ReferenceDot 
@@ -104,7 +114,7 @@ export default function AnomaliesPage() {
           <div style={{ marginTop: '32px' }}>
             <h4 style={{ fontSize: '1rem', fontWeight: 500, marginBottom: '16px' }}>Anomaly Log</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {anomalyData.filter(d => d.isAnomaly).map((anomaly, idx) => (
+              {anomalyData.filter((d: any) => d.isAnomaly).map((anomaly: any, idx: number) => (
                 <div key={idx} style={{ 
                   display: 'flex', 
                   alignItems: 'center', 
@@ -128,7 +138,7 @@ export default function AnomaliesPage() {
                   </div>
                 </div>
               ))}
-              {!loading && anomalyData.filter(d => d.isAnomaly).length === 0 && (
+              {!loading && anomalyData.filter((d: any) => d.isAnomaly).length === 0 && (
                 <div style={{ padding: '16px', color: 'var(--text-muted)' }}>No anomalies detected in the current timeframe.</div>
               )}
             </div>

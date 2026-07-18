@@ -2,27 +2,34 @@
 
 import { PageHeader } from '@/components/ui/PageHeader';
 import { RevenueChart } from '@/components/charts/Charts';
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import api from '@/lib/api';
 
 export default function SalesPage() {
-  const [forecastData, setForecastData] = useState([]);
-  
-  useEffect(() => {
-    // Attempt to fetch from API, otherwise use mock
-    api.get('/forecasts/revenue')
-      .then(res => setForecastData(res.data))
-      .catch(() => {
-        // Mock data if API fails or is not available
-        const mock = [];
-        let base = 50000;
-        for (let i = 1; i <= 30; i++) {
-          base += (Math.random() * 2000 - 500);
-          mock.push({ name: `Day ${i}`, value: base });
-        }
-        setForecastData(mock as any);
-      });
-  }, []);
+  const { data: forecastData, isLoading, isError } = useQuery({
+    queryKey: ['sales_forecast'],
+    queryFn: async () => {
+      const res = await api.get('/forecast/xgboost');
+      // XGBoost endpoint returns { forecast: [{ds, yhat...}], ... }
+      // We need to map it to {name, value} for the chart
+      return res.data.forecast.map((d: any) => ({
+        name: d.ds.split('T')[0],
+        value: d.yhat
+      }));
+    }
+  });
+
+  if (isLoading) {
+    return <div className="page-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ color: 'var(--accent-blue)' }}>Loading Forecast...</div>
+    </div>;
+  }
+
+  if (isError || !forecastData) {
+    return <div className="page-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ color: 'var(--accent-rose)' }}>Failed to load sales forecast</div>
+    </div>;
+  }
 
   return (
     <main className="page-container">

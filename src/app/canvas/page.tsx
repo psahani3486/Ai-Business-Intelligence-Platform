@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import api from '@/lib/api';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
@@ -33,8 +35,41 @@ const mockRevenueData = [
 export default function CanvasPage() {
   const [layout, setLayout] = useState<any[]>(defaultLayout);
   const [mounted, setMounted] = useState(false);
-  const [waterfallData, setWaterfallData] = useState<any[]>([]);
-  const [heatmapData, setHeatmapData] = useState<number[][]>([]);
+
+  // Intraday Revenue (Mapped from revenue-trend for now)
+  const { data: revenueData } = useQuery({
+    queryKey: ['canvas_revenue'],
+    queryFn: async () => {
+      const res = await api.get('/dashboard/revenue-trend');
+      return res.data;
+    }
+  });
+
+  // Waterfall Chart
+  const { data: waterfallData } = useQuery({
+    queryKey: ['canvas_waterfall'],
+    queryFn: async () => {
+      try {
+        const res = await api.get('/dashboard/waterfall');
+        return res.data;
+      } catch {
+        return []; // Fallback gracefully if endpoint missing
+      }
+    }
+  });
+
+  // Heatmap Chart
+  const { data: heatmapData } = useQuery({
+    queryKey: ['canvas_heatmap'],
+    queryFn: async () => {
+      try {
+        const res = await api.get('/dashboard/heatmap');
+        return res.data;
+      } catch {
+        return []; // Fallback gracefully if endpoint missing
+      }
+    }
+  });
 
   useEffect(() => {
     setMounted(true);
@@ -44,21 +79,6 @@ export default function CanvasPage() {
         setLayout(JSON.parse(saved));
       } catch (e) {}
     }
-
-    // Fetch real data
-    const fetchRealData = async () => {
-      try {
-        const [waterfallRes, heatmapRes] = await Promise.all([
-          fetch('http://localhost:8000/api/dashboard/waterfall'),
-          fetch('http://localhost:8000/api/dashboard/heatmap')
-        ]);
-        if (waterfallRes.ok) setWaterfallData(await waterfallRes.json());
-        if (heatmapRes.ok) setHeatmapData(await heatmapRes.json());
-      } catch (err) {
-        console.error("Failed to fetch canvas data", err);
-      }
-    };
-    fetchRealData();
   }, []);
 
   const onLayoutChange = (newLayout: any) => {
@@ -121,12 +141,12 @@ export default function CanvasPage() {
             <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '16px' }}>Intraday Revenue</h3>
             <div style={{ width: '100%', height: 'calc(100% - 40px)' }}>
               <ResponsiveContainer>
-                <LineChart data={mockRevenueData}>
+                <LineChart data={revenueData || []}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                  <XAxis dataKey="time" stroke="var(--text-muted)" />
+                  <XAxis dataKey="name" stroke="var(--text-muted)" />
                   <YAxis stroke="var(--text-muted)" />
                   <Tooltip contentStyle={{ backgroundColor: 'rgba(15, 23, 42, 0.9)', border: '1px solid var(--border-color)' }} />
-                  <Line type="monotone" dataKey="rev" stroke="var(--accent-blue)" strokeWidth={3} dot={{ r: 4 }} />
+                  <Line type="monotone" dataKey="value" stroke="var(--accent-blue)" strokeWidth={3} dot={{ r: 4 }} />
                 </LineChart>
               </ResponsiveContainer>
             </div>

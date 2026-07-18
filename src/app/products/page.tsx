@@ -3,19 +3,29 @@
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Package, TrendingUp, AlertTriangle } from 'lucide-react';
 import KPICard from '@/components/dashboard/KPICard';
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import api from '@/lib/api';
 
 export default function ProductsPage() {
-  const [recommendations, setRecommendations] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data: recommendations, isLoading: loading, isError } = useQuery({
+    queryKey: ['product_recommendations'],
+    queryFn: async () => {
+      const res = await api.get('/recommendations/products');
+      return res.data;
+    }
+  });
 
-  useEffect(() => {
-    api.get('/recommendations/products')
-      .then(res => setRecommendations(res.data))
-      .catch(err => console.error(err))
-      .finally(() => setLoading(false));
-  }, []);
+  if (loading) {
+    return <div className="page-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ color: 'var(--accent-blue)' }}>Loading Recommendations...</div>
+    </div>;
+  }
+
+  if (isError || !recommendations) {
+    return <div className="page-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ color: 'var(--accent-rose)' }}>Failed to load recommendations</div>
+    </div>;
+  }
 
   return (
     <main className="page-container">
@@ -38,7 +48,7 @@ export default function ProductsPage() {
         <div className="card col-span-12" style={{ marginTop: '24px', opacity: loading ? 0.5 : 1, transition: 'opacity 0.3s ease' }}>
           <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '24px' }}>Top AI Cross-Sell Recommendations</h3>
           <div className="dashboard-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
-            {recommendations.map((rec, idx) => (
+            {recommendations.map((rec: any, idx: number) => (
               <div key={idx} style={{ 
                 background: 'rgba(255, 255, 255, 0.03)', 
                 border: '1px solid var(--border-color)', 

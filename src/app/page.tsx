@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import KPICard from '@/components/dashboard/KPICard';
 import { RevenueChart, CustomerGrowthChart } from '@/components/charts/Charts';
 import { PageHeader } from '@/components/ui/PageHeader';
@@ -8,42 +9,37 @@ import { DollarSign, ShoppingCart, Users, Activity } from 'lucide-react';
 import api from '@/lib/api';
 
 export default function Dashboard() {
-  const [kpis, setKpis] = useState({ 
-    total_revenue: 0, 
-    total_orders: 0, 
-    total_customers: 0, 
-    avg_order_value: 0,
-    total_profit: 0,
-    margin_pct: 0
-  });
-  const [revenueData, setRevenueData] = useState([]);
-  const [customerGrowth, setCustomerGrowth] = useState<any>(null);
   const [activeModel, setActiveModel] = useState<'xgboost' | 'prophet'>('xgboost');
   
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  // Fetch KPIs
+  const { data: kpis, isLoading: kpisLoading, isError: kpisError } = useQuery({
+    queryKey: ['dashboard_kpis'],
+    queryFn: async () => {
+      const res = await api.get('/dashboard/kpis');
+      return res.data;
+    }
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [kpiRes, trendRes, growthRes] = await Promise.all([
-          api.get('/dashboard/kpis'),
-          api.get('/dashboard/revenue-trend'),
-          api.get('/forecast/customer-growth')
-        ]);
-        setKpis(kpiRes.data);
-        setRevenueData(trendRes.data);
-        setCustomerGrowth(growthRes.data);
-      } catch (err) {
-        console.error(err);
-        setError("Failed to load dashboard data");
-      } finally {
-        setLoading(false);
-      }
-    };
-    
-    fetchData();
-  }, []);
+  // Fetch Revenue Trend
+  const { data: revenueData, isLoading: revenueLoading, isError: revenueError } = useQuery({
+    queryKey: ['dashboard_revenue_trend'],
+    queryFn: async () => {
+      const res = await api.get('/dashboard/revenue-trend');
+      return res.data;
+    }
+  });
+
+  // Fetch Customer Growth Forecast
+  const { data: customerGrowth, isLoading: growthLoading, isError: growthError } = useQuery({
+    queryKey: ['dashboard_customer_growth'],
+    queryFn: async () => {
+      const res = await api.get('/forecast/customer-growth');
+      return res.data;
+    }
+  });
+
+  const loading = kpisLoading || revenueLoading || growthLoading;
+  const error = kpisError || revenueError || growthError ? "Failed to load dashboard data" : null;
 
   const formatCurrency = (val: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val);
   const formatNumber = (val: number) => new Intl.NumberFormat('en-US').format(val);
@@ -54,9 +50,9 @@ export default function Dashboard() {
     </div>;
   }
 
-  if (error) {
+  if (error || !kpis) {
     return <div className="page-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <div style={{ color: 'var(--accent-rose)' }}>{error}</div>
+      <div style={{ color: 'var(--accent-rose)' }}>{error || "Unknown Error"}</div>
     </div>;
   }
 

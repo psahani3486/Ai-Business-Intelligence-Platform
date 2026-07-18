@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   description: "AI-powered Business Intelligence Platform",
 };
 
+import QueryProvider from "@/components/QueryProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -19,13 +21,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="app-container">
-          <Sidebar />
-          <div className="main-content">
-            <Header />
-            {children}
+        <QueryProvider>
+          <div className="app-container">
+            <Sidebar />
+            <div className="main-content">
+              <Header />
+              {children}
+            </div>
           </div>
-        </div>
+        </QueryProvider>
       </body>
     </html>
   );
