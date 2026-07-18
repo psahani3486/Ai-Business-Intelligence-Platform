@@ -9,13 +9,8 @@ export default function SalesPage() {
   const { data: forecastData, isLoading, isError } = useQuery({
     queryKey: ['sales_forecast'],
     queryFn: async () => {
-      const res = await api.get('/forecast/xgboost');
-      // XGBoost endpoint returns { forecast: [{ds, yhat...}], ... }
-      // We need to map it to {name, value} for the chart
-      return res.data.forecast.map((d: any) => ({
-        name: d.ds.split('T')[0],
-        value: d.yhat
-      }));
+      const res = await api.get('/forecasts/revenue');
+      return res.data;
     }
   });
 

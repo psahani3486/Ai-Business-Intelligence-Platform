@@ -33,13 +33,17 @@ export default function Dashboard() {
   const { data: customerGrowth, isLoading: growthLoading, isError: growthError } = useQuery({
     queryKey: ['dashboard_customer_growth'],
     queryFn: async () => {
-      const res = await api.get('/forecast/customer-growth');
-      return res.data;
+      try {
+        const res = await api.get('/forecast/customer-growth');
+        return res.data;
+      } catch (err) {
+        return []; // Fallback gracefully if endpoint is missing
+      }
     }
   });
 
   const loading = kpisLoading || revenueLoading || growthLoading;
-  const error = kpisError || revenueError || growthError ? "Failed to load dashboard data" : null;
+  const error = kpisError || revenueError ? "Failed to load dashboard data" : null;
 
   const formatCurrency = (val: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val);
   const formatNumber = (val: number) => new Intl.NumberFormat('en-US').format(val);

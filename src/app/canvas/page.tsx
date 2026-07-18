@@ -175,7 +175,7 @@ export default function CanvasPage() {
               <BarChart size={18} color="var(--accent-blue)" /> Revenue Bridge
             </h3>
             <div style={{ width: '100%', height: 'calc(100% - 40px)' }}>
-              {waterfallData.length > 0 ? <RevenueWaterfallChart data={waterfallData} /> : <div style={{ color: 'var(--text-muted)' }}>Loading waterfall...</div>}
+              {waterfallData?.length > 0 ? <RevenueWaterfallChart data={waterfallData} /> : <div style={{ color: 'var(--text-muted)' }}>Loading waterfall...</div>}
             </div>
           </div>
 
@@ -184,7 +184,7 @@ export default function CanvasPage() {
               <Map size={18} color="var(--accent-amber)" /> User Activity Heatmap
             </h3>
             <div style={{ width: '100%', height: 'calc(100% - 40px)' }}>
-              {heatmapData.length > 0 ? <ActivityHeatmap data={heatmapData} /> : <div style={{ color: 'var(--text-muted)' }}>Loading heatmap...</div>}
+              {heatmapData?.length > 0 ? <ActivityHeatmap data={heatmapData} /> : <div style={{ color: 'var(--text-muted)' }}>Loading heatmap...</div>}
             </div>
           </div>
         </ResponsiveGridLayout>
