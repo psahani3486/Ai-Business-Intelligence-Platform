@@ -8,36 +8,36 @@ import { DollarSign, ShoppingCart, Users, Activity } from 'lucide-react';
 import api from '@/lib/api';
 
 export default function Dashboard() {
-  const [kpis, setKpis] = useState({ total_revenue: 0, total_orders: 0, total_customers: 0, avg_order_value: 0 });
+  const [kpis, setKpis] = useState({ 
+    total_revenue: 0, 
+    total_orders: 0, 
+    total_customers: 0, 
+    avg_order_value: 0,
+    total_profit: 0,
+    margin_pct: 0
+  });
   const [revenueData, setRevenueData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // In a real app, we'd fetch from API:
-    // api.get('/dashboard/kpis').then(res => setKpis(res.data));
-    // api.get('/dashboard/revenue-trend').then(res => setRevenueData(res.data));
+    const fetchData = async () => {
+      try {
+        const [kpiRes, trendRes] = await Promise.all([
+          api.get('/dashboard/kpis'),
+          api.get('/dashboard/revenue-trend')
+        ]);
+        setKpis(kpiRes.data);
+        setRevenueData(trendRes.data);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load dashboard data");
+      } finally {
+        setLoading(false);
+      }
+    };
     
-    // Simulating API call for demo to show immediate UI
-    setTimeout(() => {
-      setKpis({
-        total_revenue: 15420300,
-        total_orders: 98450,
-        total_customers: 84320,
-        avg_order_value: 156.63
-      });
-      
-      setRevenueData([
-        { name: 'Jan', value: 400000 },
-        { name: 'Feb', value: 300000 },
-        { name: 'Mar', value: 550000 },
-        { name: 'Apr', value: 450000 },
-        { name: 'May', value: 700000 },
-        { name: 'Jun', value: 850000 },
-        { name: 'Jul', value: 950000 },
-      ] as any);
-      
-      setLoading(false);
-    }, 1000);
+    fetchData();
   }, []);
 
   const formatCurrency = (val: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val);
@@ -46,6 +46,12 @@ export default function Dashboard() {
   if (loading) {
     return <div className="page-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <div style={{ color: 'var(--accent-blue)' }}>Loading Analytics...</div>
+    </div>;
+  }
+
+  if (error) {
+    return <div className="page-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ color: 'var(--accent-rose)' }}>{error}</div>
     </div>;
   }
 
@@ -70,7 +76,7 @@ export default function Dashboard() {
       />
       
       <div className="dashboard-grid">
-        <div className="col-span-3">
+        <div className="col-span-4">
           <KPICard 
             title="Total Revenue" 
             value={formatCurrency(kpis.total_revenue)} 
@@ -80,17 +86,37 @@ export default function Dashboard() {
             delay={0.1} 
           />
         </div>
-        <div className="col-span-3">
+        <div className="col-span-4">
+          <KPICard 
+            title="Total Profit" 
+            value={formatCurrency(kpis.total_profit)} 
+            trend="8.1%" 
+            isPositive={true} 
+            icon={<DollarSign />} 
+            delay={0.15} 
+          />
+        </div>
+        <div className="col-span-4">
+          <KPICard 
+            title="Profit Margin" 
+            value={`${kpis.margin_pct.toFixed(2)}%`} 
+            trend="2.0%" 
+            isPositive={true} 
+            icon={<Activity />} 
+            delay={0.2} 
+          />
+        </div>
+        <div className="col-span-4">
           <KPICard 
             title="Total Orders" 
             value={formatNumber(kpis.total_orders)} 
             trend="8.2%" 
             isPositive={true} 
             icon={<ShoppingCart />} 
-            delay={0.2} 
+            delay={0.25} 
           />
         </div>
-        <div className="col-span-3">
+        <div className="col-span-4">
           <KPICard 
             title="Active Customers" 
             value={formatNumber(kpis.total_customers)} 
@@ -100,14 +126,14 @@ export default function Dashboard() {
             delay={0.3} 
           />
         </div>
-        <div className="col-span-3">
+        <div className="col-span-4">
           <KPICard 
             title="Avg Order Value" 
             value={formatCurrency(kpis.avg_order_value)} 
             trend="2.1%" 
             isPositive={false} 
             icon={<Activity />} 
-            delay={0.4} 
+            delay={0.35} 
           />
         </div>
         

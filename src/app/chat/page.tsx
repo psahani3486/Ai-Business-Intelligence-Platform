@@ -5,6 +5,7 @@ import { PageHeader } from '@/components/ui/PageHeader';
 import { Send, Bot, User, Database, ChevronDown, ChevronUp, BarChart2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import api from '@/lib/api';
 
 interface Message {
   id: string;
@@ -34,45 +35,48 @@ export default function ChatPage() {
     setInput('');
     setIsLoading(true);
 
-    // Simulate API call with Generative UI support
-    setTimeout(() => {
-      const isRevenueQuery = userMsg.content.toLowerCase().includes('revenue');
+    try {
+      const res = await api.post('/nlq/ask', { question: userMsg.content });
+      const { sql, analysis, data, error } = res.data;
       
+      if (error && !analysis) {
+        throw new Error(error);
+      }
+
+      // Convert backend data to recharts format if it's suitable for a bar chart
+      let uiComponent = null;
+      if (analysis?.recommended_chart === 'bar' && data && data.length > 0) {
+        // extract keys: assume first string key is label, first numeric key is value
+        const keys = Object.keys(data[0]);
+        let labelKey = keys.find(k => typeof data[0][k] === 'string' || isNaN(data[0][k])) || keys[0];
+        let valueKey = keys.find(k => typeof data[0][k] === 'number') || keys[1];
+        
+        if (labelKey && valueKey) {
+          const chartData = data.map((d: any) => ({ name: String(d[labelKey]), value: Number(d[valueKey]) }));
+          uiComponent = { type: 'BarChart', data: chartData };
+        }
+      }
+
       const assistantMsg: Message & { uiComponent?: any } = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
         content: "Here is the analysis based on your query.",
-        sql: isRevenueQuery 
-          ? "SELECT category_name, SUM(total_revenue) as revenue FROM agg_category_performance GROUP BY category_name ORDER BY revenue DESC LIMIT 5;"
-          : "SELECT customer_state, COUNT(*) as count FROM dim_customers GROUP BY customer_state ORDER BY count DESC LIMIT 5;",
-        uiComponent: isRevenueQuery ? {
-          type: 'BarChart',
-          data: [
-            { name: 'Health & Beauty', value: 245000 },
-            { name: 'Computers', value: 180000 },
-            { name: 'Bed Bath', value: 165000 },
-            { name: 'Sports', value: 140000 },
-            { name: 'Furniture', value: 120000 }
-          ]
-        } : null,
-        analysis: {
-          summary: isRevenueQuery 
-            ? "Your top performing categories are Health & Beauty, Computers & Accessories, and Bed Bath & Table." 
-            : "Most of your customers are located in SP (São Paulo), followed by RJ (Rio de Janeiro) and MG (Minas Gerais).",
-          insights: isRevenueQuery
-            ? [
-              "Health & Beauty generated the highest revenue, driving 15% of total sales.",
-              "Computers & Accessories saw a 12% increase compared to last quarter."
-            ] : [
-              "São Paulo accounts for over 40% of your total customer base.",
-              "Consider expanding marketing efforts in RJ to increase market share."
-            ]
-        }
+        sql: sql,
+        uiComponent: uiComponent,
+        analysis: analysis
       };
       
       setMessages(prev => [...prev, assistantMsg]);
+    } catch (err: any) {
+      console.error(err);
+      setMessages(prev => [...prev, {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: `Sorry, I encountered an error: ${err.message || "Failed to process query."}`
+      }]);
+    } finally {
       setIsLoading(false);
-    }, 2000);
+    }
   };
 
   return (
