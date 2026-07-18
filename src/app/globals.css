@@ -17,13 +17,13 @@
   --accent-rose: #F43F5E;
   
   --border-color: rgba(255, 255, 255, 0.1);
-  --border-glow: rgba(59, 130, 246, 0.3);
+  --border-glow: rgba(59, 130, 246, 0.5);
   
   /* Glassmorphism */
-  --glass-bg: rgba(19, 26, 42, 0.5);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.08);
-  --glass-blur: blur(12px);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --glass-bg: rgba(19, 26, 42, 0.4);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --glass-blur: blur(16px);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
   
   /* Layout */
   --sidebar-width: 260px;
@@ -66,17 +66,21 @@ a {
 }
 
 .card {
-  background: var(--bg-card);
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--border-color);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 24px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
   border-color: var(--border-glow);
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.7) 100%);
 }
 
 .kpi-value {
@@ -144,6 +148,56 @@ a {
 .col-span-6 { grid-column: span 6; }
 .col-span-4 { grid-column: span 4; }
 .col-span-3 { grid-column: span 3; }
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .col-span-4 { grid-column: span 6; }
+  .col-span-8 { grid-column: span 12; }
+}
+
+@media (max-width: 992px) {
+  .col-span-6 { grid-column: span 12; }
+  .col-span-3 { grid-column: span 6; }
+  
+  .page-container {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .col-span-12, .col-span-8, .col-span-6, .col-span-4, .col-span-3 {
+    grid-column: span 1;
+  }
+  
+  .page-container {
+    padding: 16px;
+  }
+  
+  .page-title {
+    font-size: 1.5rem;
+  }
+  
+  .app-sidebar {
+    transform: translateX(-100%);
+  }
+  
+  .sidebar-open .app-sidebar {
+    transform: translateX(0);
+  }
+  
+  .mobile-menu-btn {
+    display: block !important;
+  }
+}
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {

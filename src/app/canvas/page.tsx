@@ -128,16 +128,19 @@ export default function CanvasPage() {
           isResizable={true}
           margin={[16, 16]}
         >
-          <div key="live-ticker" className="card" style={{ display: 'flex', flexDirection: 'column' }}>
-            <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Zap size={18} color="var(--accent-amber)" /> Live Orders
-            </h3>
-            <div style={{ flex: 1, overflow: 'hidden' }}>
-              <LiveOrderTicker />
+          <div key="live-ticker">
+            <div className="card" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+              <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Zap size={18} color="var(--accent-amber)" /> Live Orders
+              </h3>
+              <div style={{ flex: 1, overflow: 'hidden' }}>
+                <LiveOrderTicker />
+              </div>
             </div>
           </div>
           
-          <div key="revenue-chart" className="card">
+          <div key="revenue-chart">
+            <div className="card" style={{ height: '100%' }}>
             <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '16px' }}>Intraday Revenue</h3>
             <div style={{ width: '100%', height: 'calc(100% - 40px)' }}>
               <ResponsiveContainer>
@@ -150,41 +153,52 @@ export default function CanvasPage() {
                 </LineChart>
               </ResponsiveContainer>
             </div>
+            </div>
           </div>
           
-          <div key="metric-1" className="card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <div style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>Active Sessions</div>
-            <div style={{ fontSize: '2rem', fontWeight: 700, color: '#fff' }}>1,248</div>
-            <div style={{ color: 'var(--accent-emerald)', fontSize: '0.875rem' }}>+12% vs avg</div>
-          </div>
-
-          <div key="metric-2" className="card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <div style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>Conversion Rate</div>
-            <div style={{ fontSize: '2rem', fontWeight: 700, color: '#fff' }}>4.2%</div>
-            <div style={{ color: 'var(--accent-emerald)', fontSize: '0.875rem' }}>+0.5% vs avg</div>
-          </div>
-
-          <div key="metric-3" className="card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <div style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>Avg Processing Time</div>
-            <div style={{ fontSize: '2rem', fontWeight: 700, color: '#fff' }}>1.2s</div>
-            <div style={{ color: 'var(--accent-rose)', fontSize: '0.875rem' }}>+0.2s vs avg</div>
-          </div>
-          
-          <div key="waterfall-chart" className="card">
-            <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <BarChart size={18} color="var(--accent-blue)" /> Revenue Bridge
-            </h3>
-            <div style={{ width: '100%', height: 'calc(100% - 40px)' }}>
-              {waterfallData?.length > 0 ? <RevenueWaterfallChart data={waterfallData} /> : <div style={{ color: 'var(--text-muted)' }}>Loading waterfall...</div>}
+          <div key="metric-1">
+            <div className="card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
+              <div style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>Active Sessions</div>
+              <div style={{ fontSize: '2rem', fontWeight: 700, color: '#fff' }}>1,248</div>
+              <div style={{ color: 'var(--accent-emerald)', fontSize: '0.875rem' }}>+12% vs avg</div>
             </div>
           </div>
 
-          <div key="heatmap-chart" className="card">
-            <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Map size={18} color="var(--accent-amber)" /> User Activity Heatmap
-            </h3>
-            <div style={{ width: '100%', height: 'calc(100% - 40px)' }}>
-              {heatmapData?.length > 0 ? <ActivityHeatmap data={heatmapData} /> : <div style={{ color: 'var(--text-muted)' }}>Loading heatmap...</div>}
+          <div key="metric-2">
+            <div className="card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
+              <div style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>Conversion Rate</div>
+              <div style={{ fontSize: '2rem', fontWeight: 700, color: '#fff' }}>4.2%</div>
+              <div style={{ color: 'var(--accent-emerald)', fontSize: '0.875rem' }}>+0.5% vs avg</div>
+            </div>
+          </div>
+
+          <div key="metric-3">
+            <div className="card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
+              <div style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>Avg Processing Time</div>
+              <div style={{ fontSize: '2rem', fontWeight: 700, color: '#fff' }}>1.2s</div>
+              <div style={{ color: 'var(--accent-rose)', fontSize: '0.875rem' }}>+0.2s vs avg</div>
+            </div>
+          </div>
+          
+          <div key="waterfall-chart">
+            <div className="card" style={{ height: '100%' }}>
+              <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <BarChart size={18} color="var(--accent-blue)" /> Revenue Bridge
+              </h3>
+              <div style={{ width: '100%', height: 'calc(100% - 40px)' }}>
+                {waterfallData?.length > 0 ? <RevenueWaterfallChart data={waterfallData} /> : <div style={{ color: 'var(--text-muted)' }}>Loading waterfall...</div>}
+              </div>
+            </div>
+          </div>
+
+          <div key="heatmap-chart">
+            <div className="card" style={{ height: '100%' }}>
+              <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Map size={18} color="var(--accent-amber)" /> User Activity Heatmap
+              </h3>
+              <div style={{ width: '100%', height: 'calc(100% - 40px)' }}>
+                {heatmapData?.length > 0 ? <ActivityHeatmap data={heatmapData} /> : <div style={{ color: 'var(--text-muted)' }}>Loading heatmap...</div>}
+              </div>
             </div>
           </div>
         </ResponsiveGridLayout>

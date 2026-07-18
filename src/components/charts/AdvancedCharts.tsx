@@ -16,7 +16,7 @@ export const CohortScatterPlot = ({ data }: { data: any[] }) => {
   const clusters = Array.from(new Set(data.map(d => d.cluster)));
   
   return (
-    <div style={{ width: '100%', height: 350 }}>
+    <div style={{ width: '100%', height: '100%' }}>
       <ResponsiveContainer>
         <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
@@ -39,7 +39,7 @@ export const CohortScatterPlot = ({ data }: { data: any[] }) => {
 
 export const CategoryRadarChart = ({ data }: { data: any[] }) => {
   return (
-    <div style={{ width: '100%', height: 300 }}>
+    <div style={{ width: '100%', height: '100%' }}>
       <ResponsiveContainer>
         <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
           <PolarGrid stroke="rgba(255,255,255,0.1)" />
@@ -98,7 +98,7 @@ export const LiveOrderTicker = () => {
 
 export const RevenueWaterfallChart = ({ data }: { data: any[] }) => {
   return (
-    <div style={{ width: '100%', height: 350 }}>
+    <div style={{ width: '100%', height: '100%' }}>
       <ResponsiveContainer>
         <ComposedChart margin={{ top: 20, right: 30, left: 20, bottom: 5 }} data={data}>
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />

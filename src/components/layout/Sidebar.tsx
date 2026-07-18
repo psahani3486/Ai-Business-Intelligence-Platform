@@ -33,7 +33,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside style={{
+    <aside className="app-sidebar" style={{
       width: 'var(--sidebar-width)',
       height: '100vh',
       position: 'fixed',
@@ -45,7 +45,8 @@ export default function Sidebar() {
       background: 'var(--glass-bg)',
       backdropFilter: 'var(--glass-blur)',
       padding: '24px 16px',
-      zIndex: 40
+      zIndex: 40,
+      transition: 'transform 0.3s ease'
     }}>
       <div style={{ padding: '0 12px 32px 12px', display: 'flex', alignItems: 'center', gap: '12px' }}>
         <div style={{ 

@@ -1,6 +1,13 @@
-import { Bell, Search, UserCircle } from 'lucide-react';
+"use client";
+
+import { Bell, Search, UserCircle, Menu } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export default function Header() {
+  const toggleSidebar = () => {
+    document.body.classList.toggle('sidebar-open');
+  };
+
   return (
     <header style={{
       height: 'var(--header-height)',
@@ -15,7 +22,15 @@ export default function Header() {
       top: 0,
       zIndex: 30
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', background: 'rgba(255,255,255,0.05)', borderRadius: '24px', padding: '8px 16px', width: '300px', border: '1px solid rgba(255,255,255,0.1)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <button 
+          className="mobile-menu-btn" 
+          onClick={toggleSidebar}
+          style={{ background: 'transparent', border: 'none', color: '#fff', cursor: 'pointer', display: 'none' }}
+        >
+          <Menu size={24} />
+        </button>
+        <div style={{ display: 'flex', alignItems: 'center', background: 'rgba(255,255,255,0.05)', borderRadius: '24px', padding: '8px 16px', width: '300px', border: '1px solid rgba(255,255,255,0.1)' }}>
         <Search size={18} color="var(--text-muted)" style={{ marginRight: '8px' }} />
         <input 
           type="text" 
@@ -29,6 +44,7 @@ export default function Header() {
             fontSize: '0.875rem'
           }} 
         />
+      </div>
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>

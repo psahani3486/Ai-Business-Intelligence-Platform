@@ -34,7 +34,7 @@ export default function Dashboard() {
     queryKey: ['dashboard_customer_growth'],
     queryFn: async () => {
       try {
-        const res = await api.get('/forecast/customer-growth');
+        const res = await api.get('/forecasts/customer-growth');
         return res.data;
       } catch (err) {
         return []; // Fallback gracefully if endpoint is missing
