@@ -56,7 +56,8 @@ export default function SalesPage() {
             onClick={async () => {
               try {
                 const res = await api.post('/reports/generate', { title: "Sales Analytics Report", include_charts: true });
-                window.open(`http://127.0.0.1:8000/api/reports/download/${res.data.report_id}`, '_blank');
+                const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+                window.open(`${baseUrl}/reports/download/${res.data.report_id}`, '_blank');
               } catch {
                 alert("Sales Analytics PDF report exported.");
               }

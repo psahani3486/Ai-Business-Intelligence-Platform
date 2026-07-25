@@ -61,7 +61,8 @@ export const LiveOrderTicker = () => {
   const [orders, setOrders] = useState<any[]>([]);
 
   useEffect(() => {
-    const eventSource = new EventSource('http://127.0.0.1:8000/api/stream/live-orders');
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    const eventSource = new EventSource(`${baseUrl}/stream/live-orders`);
     
     eventSource.onmessage = (e) => {
       try {
