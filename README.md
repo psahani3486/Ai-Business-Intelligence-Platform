@@ -1,67 +1,149 @@
-# Enterprise AI Business Intelligence Platform
+# 🌌 Enterprise AI Business Intelligence Platform
 
-![Build Status](https://img.shields.io/github/actions/workflow/status/quantumbi/bi-platform/main.yml?branch=main)
-![Test Coverage](https://img.shields.io/badge/coverage-95%25-brightgreen)
-![Docker Build](https://img.shields.io/badge/docker-passing-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
+[![Live App](https://img.shields.io/badge/Live_Dashboard-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://ai-business-intelligence-platform-u.vercel.app/)
+[![Live API](https://img.shields.io/badge/Live_API-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://nexus-bi-backend-4q5s.onrender.com/health)
+[![Next.js](https://img.shields.io/badge/Frontend-Next.js_16-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![DuckDB](https://img.shields.io/badge/Database-DuckDB-FFF000?style=for-the-badge&logo=duckdb&logoColor=black)](https://duckdb.org/)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-A production-grade, full-stack AI Business Intelligence Platform that combines data engineering, machine learning, LLM-powered natural language analytics, and a premium Next.js dashboard.
+A production-grade, full-stack **Enterprise AI & Business Intelligence Platform** built with **Next.js 16**, **FastAPI**, **DuckDB**, **XGBoost**, **Isolation Forest**, and **MLflow**. Features real-time analytical dashboards, predictive sales forecasting, automated anomaly detection, SHAP explainability, and LLM-powered natural language SQL querying.
 
-##  Features
+---
 
-- **Data Engineering**: Automated ETL pipeline using DuckDB for high-performance analytical queries.
-- **Machine Learning**: 
-  - Sales Forecasting (XGBoost)
-  - Customer Churn Prediction with SHAP explainability
-  - Customer Lifetime Value (CLV) prediction
-  - Anomaly Detection (Isolation Forest)
-  - Product Recommendations (Collaborative Filtering)
-- **MLOps**: MLflow integration for tracking experiments, metrics, and models.
-- **AI Agent**: Groq-powered natural language to SQL engine. Ask questions in plain English, get executed SQL, data, and executive summaries.
-- **Backend API**: FastAPI with 15+ REST endpoints.
-- **Frontend Dashboard**: Next.js with a premium dark theme, glassmorphism UI, Framer Motion animations, and Recharts.
-- **DevOps**: Docker and Docker Compose ready.
+## 🌐 Live Cloud Deployments
 
-## 📁 Project Structure
+- **🌐 Web Application Dashboard**: [https://ai-business-intelligence-platform-u.vercel.app/](https://ai-business-intelligence-platform-u.vercel.app/)
+- **⚙️ Live Backend REST API**: [https://nexus-bi-backend-4q5s.onrender.com/health](https://nexus-bi-backend-4q5s.onrender.com/health)
 
-- `backend/`: FastAPI application, DuckDB database manager, ML models, and ETL pipeline.
-- `frontend/`: Next.js React application with premium styling.
-- `data/`: Raw datasets (Olist E-commerce and Telco Churn).
-- `mlruns/`: MLflow tracking data.
+---
 
-## 🛠️ Quick Start
+## 📸 Platform Screenshots
 
-### 1. Environment Setup
+### 📊 1. Executive Overview Dashboard
+> *Real-time KPI cards ($13.2M Revenue, 96.4k Orders), revenue trend run-rate, and executive PDF report generator.*
 
-Create a `.env` file in the root directory (copy from `.env.example`):
+![Executive Overview Dashboard](frontend/public/screenshots/executive_overview.png)
+
+---
+
+### 📈 2. Sales Analytics & Revenue Forecasting
+> *Multi-channel sales velocity, regional sales distribution, payment method breakdowns, and 30-day XGBoost revenue forecasting.*
+
+![Sales Analytics](frontend/public/screenshots/sales_analytics.png)
+
+---
+
+### ⚙️ 3. MLOps Control Center & Tracking Registry
+> *MLflow 2.11 model tracking registry, pipeline health SLA matrices (99.8%), evaluation metrics, hyperparameter drawers, and live terminal console.*
+
+![MLOps Control Center](frontend/public/screenshots/mlops_control_center.png)
+
+---
+
+## 🚀 Key Features
+
+- **⚡ High-Performance Analytical Engine**: In-memory OLAP query execution using **DuckDB** over the 100,000+ record Brazilian E-Commerce dataset.
+- **🤖 Predictive Machine Learning**:
+  - **Revenue Forecasting**: XGBoost & Prophet time-series models for 30-day run-rate predictions.
+  - **Anomaly & Fraud Detection**: Isolation Forest multi-feature outlier detection across revenue, inventory, traffic, and order metrics.
+  - **Customer Churn & CLV**: SHAP-explained customer retention scoring and lifetime value prediction.
+  - **Product Recommendations**: Collaborative filtering for cross-sell and up-sell opportunities.
+- **🌌 Option 1 Design System**: Glassmorphic dark theme built with curated HSL design tokens (`#38BDF8` Electric Cyan, `#818CF8` Neon Violet, `#34D399` Mint Emerald).
+- **📱 100% Mobile Responsive**: Touch-optimized slide-in navigation drawer, fluid typography, and responsive grid breakpoints.
+- **📜 Executive PDF Report Generator**: ReportLab & FPDF automated PDF generation with embedded analytics charts.
+
+---
+
+## 🏗️ Architecture & Tech Stack
+
+```
+                                  +------------------------------+
+                                  |   Vercel Edge CDN (Next.js)  |
+                                  |  - Responsive Glassmorphism  |
+                                  |  - Recharts & Framer Motion  |
+                                  +--------------+---------------+
+                                                 |
+                                                 v REST / JSON
+                                  +--------------+---------------+
+                                  |  Render.com (FastAPI Server) |
+                                  |  - Uvicorn ASGI Runner       |
+                                  |  - Prometheus Monitoring     |
+                                  +--------------+---------------+
+                                                 |
+                     +---------------------------+---------------------------+
+                     |                                                       |
+                     v                                                       v
+      +--------------+---------------+                       +---------------+---------------+
+      |    DuckDB OLAP Engine        |                       |   MLflow Tracking Registry    |
+      |  - 100k+ E-Commerce Data     |                       |  - XGBoost & Prophet Models   |
+      |  - Aggregated Analytics      |                       |  - Isolation Forest Outliers  |
+      +------------------------------+                       +-------------------------------+
+```
+
+| Component | Technology Used |
+|---|---|
+| **Frontend Framework** | Next.js 16 (App Router), React 19, TypeScript |
+| **Styling & Aesthetics** | Dark Glassmorphic Design System (Option 1 Palette), Vanilla CSS, Framer Motion |
+| **Data Visualization** | Recharts (Area, Line, Bar, Scatter, Radar) |
+| **Backend API** | FastAPI, Uvicorn, Python 3.11, Pydantic v2 |
+| **Analytical Database** | DuckDB (OLAP Columnar Database) |
+| **ML Engine** | XGBoost, Prophet, Scikit-Learn, PyTorch, SHAP |
+| **MLOps & Governance** | MLflow 2.11 Tracking Registry & Model Store |
+| **Monitoring** | Prometheus FastAPI Instrumentator |
+
+---
+
+## 🛠️ Local Development & Quick Start
+
+### 1. Clone & Setup Environment
 
 ```bash
+git clone https://github.com/psahani3486/Ai-Business-Intelligence-Platform.git
+cd Ai-Business-Intelligence-Platform
+```
+
+Create a `.env` file in the root directory:
+
+```env
+DATABASE_PATH=data/warehouse.duckdb
 GROQ_API_KEY=your_groq_api_key_here
+MLFLOW_TRACKING_URI=./mlruns
 ```
 
-### 2. Run Data Pipeline & Train Models
+### 2. Start Backend (FastAPI)
 
 ```bash
-# Install backend requirements
-pip install -r backend/requirements.txt
-
-# Run the ETL pipeline to ingest data into DuckDB and create features
-python backend/etl/pipeline.py
-
-# Train all ML models
-python backend/ml/train_all.py
+pip install -r requirements.txt
+python -m uvicorn backend.api.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
-### 3. Start the Application using Docker
+### 3. Start Frontend (Next.js)
 
 ```bash
-docker-compose up --build
+cd frontend
+npm install
+npm run dev
 ```
 
-- **Frontend Dashboard**: `http://localhost:3000`
-- **FastAPI Backend**: `http://localhost:8000/docs` (Swagger UI)
-- **MLflow Tracking**: `http://localhost:5000`
+Open **`http://localhost:3000`** in your browser to access the dashboard.
 
-## 📊 Datasets Used
-- **Brazilian E-Commerce Public Dataset by Olist**: Orders, items, customers, and products.
-- **Telco Customer Churn Dataset**: Demographics and services for churn prediction.
+---
+
+## 🐳 Docker Deployment
+
+To launch the full stack locally via Docker Compose:
+
+```bash
+docker-compose up -d --build
+```
+
+- **Dashboard**: `http://localhost:3000`
+- **FastAPI Docs**: `http://localhost:8000/docs`
+- **MLflow UI**: `http://localhost:5000`
+
+---
+
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for details.
