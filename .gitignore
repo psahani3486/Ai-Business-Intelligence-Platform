@@ -21,9 +21,6 @@ env/
 data/*.duckdb.wal
 mlruns/.trash/
 
-# Workflows (optional)
-.github/
-
 # Environment & IDE
 .env
 .env.local
