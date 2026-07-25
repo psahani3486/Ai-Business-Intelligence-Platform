@@ -1,0 +1,14 @@
+artifact_uri: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/5c7fc69d62994fc4b3e34088558f4f1a/artifacts
+end_time: 1784304980512
+entry_point_name: ''
+experiment_id: '134831584297695794'
+lifecycle_stage: active
+run_id: 5c7fc69d62994fc4b3e34088558f4f1a
+run_name: customer_clustering
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1784304971202
+status: 3
+tags: []
+user_id: Pankaj

@@ -1,0 +1,14 @@
+artifact_uri: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/eabe9e252cbb430981dde57a9c177711/artifacts
+end_time: 1784359264565
+entry_point_name: ''
+experiment_id: '134831584297695794'
+lifecycle_stage: active
+run_id: eabe9e252cbb430981dde57a9c177711
+run_name: anomaly_model_orders
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1784359261397
+status: 3
+tags: []
+user_id: Pankaj

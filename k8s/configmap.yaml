@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: bi-platform
+  labels:
+    app: backend
+data:
+  ENVIRONMENT: "production"
+  MLFLOW_TRACKING_URI: "http://mlflow-service:5000"
+  DATABASE_PATH: "/data/warehouse.duckdb"
+  LOG_LEVEL: "INFO"

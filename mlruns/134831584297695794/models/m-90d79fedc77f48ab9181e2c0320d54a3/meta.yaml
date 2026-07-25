@@ -1,0 +1,10 @@
+artifact_location: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/models/m-90d79fedc77f48ab9181e2c0320d54a3/artifacts
+creation_timestamp: 1784358750171
+experiment_id: '134831584297695794'
+last_updated_timestamp: 1784358753903
+model_id: m-90d79fedc77f48ab9181e2c0320d54a3
+model_type: null
+name: clv_model
+source_run_id: 512ada244a894fa989f3c9cca1cb48e1
+status: 2
+status_message: null

@@ -1,0 +1,14 @@
+artifact_uri: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/51eb8fa45743401884d928f162b17f00/artifacts
+end_time: 1784358718008
+entry_point_name: ''
+experiment_id: '134831584297695794'
+lifecycle_stage: active
+run_id: 51eb8fa45743401884d928f162b17f00
+run_name: customer_growth_returning_prophet
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1784358717650
+status: 3
+tags: []
+user_id: Pankaj

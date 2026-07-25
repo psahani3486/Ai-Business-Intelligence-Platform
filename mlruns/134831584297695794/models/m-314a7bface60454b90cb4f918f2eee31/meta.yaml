@@ -1,0 +1,10 @@
+artifact_location: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/models/m-314a7bface60454b90cb4f918f2eee31/artifacts
+creation_timestamp: 1784358713229
+experiment_id: '134831584297695794'
+last_updated_timestamp: 1784358716865
+model_id: m-314a7bface60454b90cb4f918f2eee31
+model_type: null
+name: customer_growth_rate_xgb
+source_run_id: 2ca29f420d364095b6bbf4f2ede1a718
+status: 2
+status_message: null

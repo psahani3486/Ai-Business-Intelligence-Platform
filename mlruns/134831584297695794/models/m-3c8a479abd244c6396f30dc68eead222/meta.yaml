@@ -1,0 +1,10 @@
+artifact_location: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/models/m-3c8a479abd244c6396f30dc68eead222/artifacts
+creation_timestamp: 1784357824431
+experiment_id: '134831584297695794'
+last_updated_timestamp: 1784357836579
+model_id: m-3c8a479abd244c6396f30dc68eead222
+model_type: null
+name: prophet_forecasting_model
+source_run_id: 13bafb753aeb490d9ee614ab4b9eba8d
+status: 2
+status_message: null

@@ -1,0 +1,14 @@
+artifact_uri: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/8e23f15d7fb646ba930d5753d06655a4/artifacts
+end_time: 1784358746077
+entry_point_name: ''
+experiment_id: '134831584297695794'
+lifecycle_stage: active
+run_id: 8e23f15d7fb646ba930d5753d06655a4
+run_name: revenue_forecasting_tft
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1784358719405
+status: 3
+tags: []
+user_id: Pankaj

@@ -1,0 +1,10 @@
+artifact_location: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/models/m-487a768b1b6945d3aacb41da48bd1ecc/artifacts
+creation_timestamp: 1784358718315
+experiment_id: '134831584297695794'
+last_updated_timestamp: 1784358718392
+model_id: m-487a768b1b6945d3aacb41da48bd1ecc
+model_type: null
+name: customer_growth_mau_prophet
+source_run_id: 337ac6ce410c4e6e8392fa457e03a41a
+status: 2
+status_message: null

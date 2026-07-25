@@ -1,0 +1,22 @@
+artifact_path: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/models/m-3d13f38960814675a03d8c0d66a47a42/artifacts
+flavors:
+  python_function:
+    data: model.ubj
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.xgboost
+    python_version: 3.13.5
+  xgboost:
+    code: null
+    data: model.ubj
+    model_class: xgboost.sklearn.XGBRegressor
+    model_format: ubj
+    xgb_version: 3.2.0
+mlflow_version: 3.11.1
+model_id: m-3d13f38960814675a03d8c0d66a47a42
+model_size_bytes: 227089
+model_uuid: m-3d13f38960814675a03d8c0d66a47a42
+prompts: null
+run_id: 60a01e89269845c3ab4c18468ba01c5e
+utc_time_created: '2026-07-18 07:11:31.255977'

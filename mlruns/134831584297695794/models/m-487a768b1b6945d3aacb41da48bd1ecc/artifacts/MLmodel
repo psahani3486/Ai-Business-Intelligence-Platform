@@ -1,0 +1,21 @@
+artifact_path: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/models/m-487a768b1b6945d3aacb41da48bd1ecc/artifacts
+flavors:
+  prophet:
+    code: null
+    data: model.pr
+    model_type: Prophet
+    prophet_version: 1.3.0
+  python_function:
+    data: model.pr
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.prophet
+    python_version: 3.13.5
+mlflow_version: 3.11.1
+model_id: m-487a768b1b6945d3aacb41da48bd1ecc
+model_size_bytes: 111868
+model_uuid: m-487a768b1b6945d3aacb41da48bd1ecc
+prompts: null
+run_id: 337ac6ce410c4e6e8392fa457e03a41a
+utc_time_created: '2026-07-18 07:11:58.356553'

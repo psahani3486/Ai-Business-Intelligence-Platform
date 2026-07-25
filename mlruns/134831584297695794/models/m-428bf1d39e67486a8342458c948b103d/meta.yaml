@@ -1,0 +1,10 @@
+artifact_location: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/models/m-428bf1d39e67486a8342458c948b103d/artifacts
+creation_timestamp: 1784306413291
+experiment_id: '134831584297695794'
+last_updated_timestamp: 1784306421086
+model_id: m-428bf1d39e67486a8342458c948b103d
+model_type: null
+name: forecasting_model
+source_run_id: 19dc1d47e36d45c5b33799ca92b9866c
+status: 2
+status_message: null

@@ -1,0 +1,10 @@
+artifact_location: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/models/m-cf25efcff4c340faba1f7556341ef3c5/artifacts
+creation_timestamp: 1784306805417
+experiment_id: '134831584297695794'
+last_updated_timestamp: 1784306809127
+model_id: m-cf25efcff4c340faba1f7556341ef3c5
+model_type: null
+name: clustering_model
+source_run_id: efb6b8666d08432b92fa2c0bf667daa9
+status: 2
+status_message: null

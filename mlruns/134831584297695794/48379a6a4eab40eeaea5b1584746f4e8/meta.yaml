@@ -1,0 +1,14 @@
+artifact_uri: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/48379a6a4eab40eeaea5b1584746f4e8/artifacts
+end_time: 1784301564463
+entry_point_name: ''
+experiment_id: '134831584297695794'
+lifecycle_stage: active
+run_id: 48379a6a4eab40eeaea5b1584746f4e8
+run_name: telco_churn
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1784301564292
+status: 4
+tags: []
+user_id: Pankaj

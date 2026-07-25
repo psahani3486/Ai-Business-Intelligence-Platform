@@ -1,0 +1,10 @@
+artifact_location: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/models/m-72eaf0477b0d44cab202f5254c9726c2/artifacts
+creation_timestamp: 1784359264727
+experiment_id: '134831584297695794'
+last_updated_timestamp: 1784359267723
+model_id: m-72eaf0477b0d44cab202f5254c9726c2
+model_type: null
+name: anomaly_model_fraud
+source_run_id: c8aecc252bbf436d8257970a87247ffd
+status: 2
+status_message: null

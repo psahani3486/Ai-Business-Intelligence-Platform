@@ -1,0 +1,10 @@
+artifact_location: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/models/m-685cee3a5fb54680af5b4528a72f71a7/artifacts
+creation_timestamp: 1784358754119
+experiment_id: '134831584297695794'
+last_updated_timestamp: 1784358757141
+model_id: m-685cee3a5fb54680af5b4528a72f71a7
+model_type: null
+name: anomaly_model
+source_run_id: 107e555633b84536ad1b748830bad6f3
+status: 2
+status_message: null

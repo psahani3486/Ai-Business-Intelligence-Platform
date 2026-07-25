@@ -1,0 +1,10 @@
+artifact_location: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/models/m-8cbee363f0554f6394ee746c9e4dad36/artifacts
+creation_timestamp: 1784357661071
+experiment_id: '134831584297695794'
+last_updated_timestamp: 1784357665017
+model_id: m-8cbee363f0554f6394ee746c9e4dad36
+model_type: null
+name: customer_growth_forecast_model
+source_run_id: 925abdbb8b774c92b86bd0b33ddeeb7e
+status: 2
+status_message: null

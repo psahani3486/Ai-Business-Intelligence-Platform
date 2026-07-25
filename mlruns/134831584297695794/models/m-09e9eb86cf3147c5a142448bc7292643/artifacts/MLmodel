@@ -1,0 +1,23 @@
+artifact_path: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/models/m-09e9eb86cf3147c5a142448bc7292643/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.5
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.8.0
+    skops_trusted_types: null
+mlflow_version: 3.11.1
+model_id: m-09e9eb86cf3147c5a142448bc7292643
+model_size_bytes: 1276172
+model_uuid: m-09e9eb86cf3147c5a142448bc7292643
+prompts: null
+run_id: e29485b634024f11a4eedd1a51a95140
+utc_time_created: '2026-07-18 07:20:47.421145'

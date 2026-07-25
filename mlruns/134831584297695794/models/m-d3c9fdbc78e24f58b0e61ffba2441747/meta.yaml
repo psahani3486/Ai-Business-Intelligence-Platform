@@ -1,0 +1,10 @@
+artifact_location: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/models/m-d3c9fdbc78e24f58b0e61ffba2441747/artifacts
+creation_timestamp: 1784358718690
+experiment_id: '134831584297695794'
+last_updated_timestamp: 1784358718779
+model_id: m-d3c9fdbc78e24f58b0e61ffba2441747
+model_type: null
+name: customer_growth_rate_prophet
+source_run_id: 1b2a3720e1d04928a06c3f62374f0920
+status: 2
+status_message: null

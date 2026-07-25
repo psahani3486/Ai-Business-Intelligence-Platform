@@ -1,0 +1,10 @@
+artifact_location: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/models/m-7c52b7c0ae194ad2bf68b4a8d31f128e/artifacts
+creation_timestamp: 1784306713902
+experiment_id: '134831584297695794'
+last_updated_timestamp: 1784306718585
+model_id: m-7c52b7c0ae194ad2bf68b4a8d31f128e
+model_type: null
+name: churn_model
+source_run_id: d7ab07c75a694cfdafbb6fc472eb5e80
+status: 2
+status_message: null

@@ -1,0 +1,14 @@
+artifact_uri: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/926329aaa38c4c568bd52b8d31c4cfbf/artifacts
+end_time: 1784358701679
+entry_point_name: ''
+experiment_id: '134831584297695794'
+lifecycle_stage: active
+run_id: 926329aaa38c4c568bd52b8d31c4cfbf
+run_name: inventory_forecast_model
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1784358697659
+status: 3
+tags: []
+user_id: Pankaj

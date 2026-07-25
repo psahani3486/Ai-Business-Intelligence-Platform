@@ -1,0 +1,14 @@
+artifact_uri: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/dbd91ed394984d1c94240c3c075644a5/artifacts
+end_time: 1784358713078
+entry_point_name: ''
+experiment_id: '134831584297695794'
+lifecycle_stage: active
+run_id: dbd91ed394984d1c94240c3c075644a5
+run_name: customer_growth_mau_xgb
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1784358709348
+status: 3
+tags: []
+user_id: Pankaj

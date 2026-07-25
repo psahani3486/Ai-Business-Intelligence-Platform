@@ -1,0 +1,10 @@
+artifact_location: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/models/m-6a9960c0e0434e879acf6d2052eb8b4d/artifacts
+creation_timestamp: 1784358697798
+experiment_id: '134831584297695794'
+last_updated_timestamp: 1784358701661
+model_id: m-6a9960c0e0434e879acf6d2052eb8b4d
+model_type: null
+name: inventory_forecast_model
+source_run_id: 926329aaa38c4c568bd52b8d31c4cfbf
+status: 2
+status_message: null

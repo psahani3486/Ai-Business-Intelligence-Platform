@@ -1,0 +1,10 @@
+artifact_location: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/models/m-4564bc5349654ec290397ac62758f7c1/artifacts
+creation_timestamp: 1784358415657
+experiment_id: '134831584297695794'
+last_updated_timestamp: 1784358427688
+model_id: m-4564bc5349654ec290397ac62758f7c1
+model_type: null
+name: tft_forecasting_model
+source_run_id: 1df53f605bf6490d9bc63383c89f7532
+status: 2
+status_message: null

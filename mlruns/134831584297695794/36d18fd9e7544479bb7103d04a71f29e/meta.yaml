@@ -1,0 +1,14 @@
+artifact_uri: file:C:/Users/Pankaj/Downloads/AI Business Intelligence Platform/mlruns/134831584297695794/36d18fd9e7544479bb7103d04a71f29e/artifacts
+end_time: 1784358757838
+entry_point_name: ''
+experiment_id: '134831584297695794'
+lifecycle_stage: active
+run_id: 36d18fd9e7544479bb7103d04a71f29e
+run_name: product_recommendations
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1784358757654
+status: 3
+tags: []
+user_id: Pankaj
