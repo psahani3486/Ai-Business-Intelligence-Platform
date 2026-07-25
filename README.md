@@ -1,4 +1,4 @@
-# 🌌 Enterprise AI Business Intelligence Platform
+# 🌌 Business Intelligence Platform
 
 [![Live App](https://img.shields.io/badge/Live_Dashboard-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://ai-business-intelligence-platform-u.vercel.app/)
 [![Live API](https://img.shields.io/badge/Live_API-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://nexus-bi-backend-4q5s.onrender.com/health)
@@ -7,7 +7,7 @@
 [![DuckDB](https://img.shields.io/badge/Database-DuckDB-FFF000?style=for-the-badge&logo=duckdb&logoColor=black)](https://duckdb.org/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-A production-grade, full-stack **Enterprise AI & Business Intelligence Platform** built with **Next.js 16**, **FastAPI**, **DuckDB**, **XGBoost**, **Isolation Forest**, and **MLflow**. Features real-time analytical dashboards, predictive sales forecasting, automated anomaly detection, SHAP explainability, and LLM-powered natural language SQL querying.
+A production-grade, full-stack **Business Intelligence Platform** built with **Next.js 16**, **FastAPI**, **DuckDB**, **XGBoost**, **Isolation Forest**, and **MLflow**. Features real-time analytical dashboards, predictive sales forecasting, automated anomaly detection, SHAP explainability, and LLM-powered natural language SQL querying.
 
 ---
 
@@ -99,8 +99,8 @@ A production-grade, full-stack **Enterprise AI & Business Intelligence Platform*
 ### 1. Clone & Setup Environment
 
 ```bash
-git clone https://github.com/psahani3486/Ai-Business-Intelligence-Platform.git
-cd Ai-Business-Intelligence-Platform
+git clone https://github.com/psahani3486/Business-Intelligence-Platform.git
+cd Business-Intelligence-Platform
 ```
 
 Create a `.env` file in the root directory:
