@@ -11,7 +11,7 @@ A production-grade, full-stack **Enterprise AI & Business Intelligence Platform*
 
 ---
 
-## 🌐 Live Cloud Deployments
+##  Live Cloud Deployments
 
 - **🌐 Web Application Dashboard**: [https://ai-business-intelligence-platform-u.vercel.app/](https://ai-business-intelligence-platform-u.vercel.app/)
 - **⚙️ Live Backend REST API**: [https://nexus-bi-backend-4q5s.onrender.com/health](https://nexus-bi-backend-4q5s.onrender.com/health)
@@ -132,7 +132,6 @@ Open **`http://localhost:3000`** in your browser to access the dashboard.
 
 ## 🐳 Docker Deployment
 
-To launch the full stack locally via Docker Compose:
 
 ```bash
 docker-compose up -d --build
